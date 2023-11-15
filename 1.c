@@ -24,7 +24,6 @@ int main(void)
             exit(EXIT_SUCCESS);
         }
 
-        // Remove the newline character
         if (buffer[characters - 1] == '\n') {
             buffer[characters - 1] = '\0';
         }
@@ -37,13 +36,16 @@ int main(void)
         }
 
         if (child_pid == 0) {
-            // Child process
-            if (execve(buffer, NULL, NULL) == -1) {
+
+            char *args[2];
+            args[0] = buffer;
+            args[1] = NULL;
+
+            if (execve(buffer, args, NULL) == -1) {
                 perror("Command not found");
                 exit(EXIT_FAILURE);
             }
         } else {
-            // Parent process
             wait(&status);
         }
     }
