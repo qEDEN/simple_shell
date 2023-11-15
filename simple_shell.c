@@ -21,7 +21,6 @@ void execute_command(char *command)
 	}
 	else if (pid == 0)
 	{
-		/* Child process */
 		char **args = malloc(2 * sizeof(char *));
 
 		if (args == NULL)
@@ -35,13 +34,11 @@ void execute_command(char *command)
 
 		execvp(args[0], args);
 
-		/* execvp only returns on error */
 		perror("execvp");
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		/* Parent process */
 		int status;
 
 		waitpid(pid, &status, 0);
@@ -49,10 +46,6 @@ void execute_command(char *command)
 		if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
 		{
 			printf("Command executed successfully\n");
-		}
-		else
-		{
-			printf("Command failed\n");
 		}
 	}
 }
