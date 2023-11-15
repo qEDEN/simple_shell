@@ -1,0 +1,22 @@
+#!/bin/bash
+
+display_prompt() {
+    printf "#cisfun$ "
+}
+
+while true; do
+    display_prompt
+
+    read -r command
+
+    if [ -z "$command" ]; then
+        echo "Exiting shell."
+        break
+    fi
+
+    if [ "$command" = "exit" ]; then
+        break
+    fi
+
+    eval "$command"
+done
