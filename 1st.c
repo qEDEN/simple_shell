@@ -6,12 +6,20 @@
 
 #define MAX_COMMAND_LENGTH 100
 
+/**
+ * display_prompt - Display the shell prompt.
+ */
 void display_prompt(void)
 {
 	printf("#cisfun$ ");
 	fflush(stdout);
 }
 
+/**
+ * main - Simple shell program.
+ *
+ * Return: Always 0.
+ */
 int main(void)
 {
 	while (1)
@@ -20,7 +28,6 @@ int main(void)
 		pid_t pid;
 
 		display_prompt();
-
 		if (fgets(command, sizeof(command), stdin) == NULL)
 		{
 			printf("\nExiting shell.\n");
