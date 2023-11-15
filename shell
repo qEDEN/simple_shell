@@ -1,0 +1,32 @@
+#!/bin/bash
+
+display_prompt() {
+    printf "#cisfun$ "
+}
+
+while true; do
+    display_prompt
+
+    read -r command
+
+    if [ -z "$command" ]; then
+        echo "Exiting shell."
+        break
+    fi
+
+    if [ "$command" = "exit" ]; then
+        break
+    fi
+
+    if [[ "$command" =~ [[:space:]] ]]; then
+        echo "Error: Command must be a single word."
+        continue
+    fi
+
+    if ! command -v "$command" > /dev/null 2>&1; then
+        echo "$0: $command: command not found"
+        continue
+    fi
+
+    "$command"
+done
